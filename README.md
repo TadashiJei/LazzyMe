@@ -41,7 +41,7 @@ Edit `config.json` and add your OpenAI API key.
 
 4. Run the application:
 ```bash
-python inter_ass.py
+python main.py
 ```
 
 ## 🛠️ Technical Requirements
