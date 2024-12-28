@@ -47,7 +47,7 @@ python inter_ass.py
 ## 🛠️ Technical Requirements
 
 - Python 3.8+
-- OpenAI API key
+- OpenAI API key / Gemini
 - Modern web browser
 - Internet connection
 
@@ -70,7 +70,7 @@ python inter_ass.py
 - **Session Management**: Track and save interview progress
 
 ### API Integration
-- OpenAI GPT integration for natural conversation
+- OpenAI GPT  / Gemini integration for natural conversation
 - Speech-to-text processing
 - Real-time response analysis
 
