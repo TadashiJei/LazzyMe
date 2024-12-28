@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatic Answers</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img class="logo" src="logo.svg" alt="AI Interview Assistant Logo">
+            <span class="close-logo">&times;</span>
+        </div>
+        
+        <div class="content">
+            <div class="questions">
+                <h2>Questions</h2>
+                <div id="questionsArea"></div>
+            </div>
+            <div class="answers">
+                <h2>
+                    Answers
+                    <span id="ttsToggle" class="tts-toggle" title="Toggle Text-to-Speech">🔊</span>
+                </h2>
+                <div id="answersArea"></div>
+            </div>
+        </div>
+        <div class="button-container">
+            <div class="model-selection">
+                <select id="modelSelect">
+                    <option value="">Select AI Model</option>
+                    <option value="gpt">ChatGPT</option>
+                    <option value="gemini">Google Gemini</option>
+                </select>
+            </div>
+            <div class="interviewer-settings">
+                <div class="role-switch">
+                    <label>AI Role:</label>
+                    <select id="roleSelect">
+                        <option value="interviewer">AI as Interviewer</option>
+                        <option value="expert">AI as Interview Expert</option>
+                        <option value="developer">AI as Technical Expert (Developer)</option>
+                        <option value="pitcher">AI as Pitch Expert (Hackathons)</option>
+                    </select>
+                    <p class="role-info" id="roleInfo">Current Mode: AI will conduct the interview</p>
+                </div>
+
+                <div class="knowledge-base">
+                    <label>Upload Knowledge Base:</label>
+                    <div class="file-upload-container">
+                        <input type="file" id="fileUpload" multiple accept=".pdf,.docx,.pptx,.csv,.txt,.jpg,.png,.fig" />
+                        <div id="uploadedFiles" class="uploaded-files"></div>
+                    </div>
+                </div>
+
+                <div class="hackathon-info" style="display: none;">
+                    <label>Hackathon Details:</label>
+                    <div class="hackathon-fields">
+                        <input type="text" id="hackathonName" placeholder="Hackathon Name" />
+                        <textarea id="problemStatement" placeholder="Problem Statement"></textarea>
+                        <div class="criteria-section">
+                            <label>Judging Criteria:</label>
+                            <div id="criteriaList">
+                                <div class="criteria-item">
+                                    <input type="text" placeholder="Criterion (e.g., Innovation)" />
+                                    <input type="number" placeholder="Weight %" min="0" max="100" />
+                                </div>
+                            </div>
+                            <button type="button" id="addCriterion">+ Add Criterion</button>
+                        </div>
+                        <div class="sdg-section">
+                            <label>SDG Goals:</label>
+                            <select id="sdgGoals" multiple>
+                                <option value="1">No Poverty</option>
+                                <option value="2">Zero Hunger</option>
+                                <option value="3">Good Health and Well-being</option>
+                                <option value="4">Quality Education</option>
+                                <option value="5">Gender Equality</option>
+                                <option value="6">Clean Water and Sanitation</option>
+                                <option value="7">Affordable and Clean Energy</option>
+                                <option value="8">Decent Work and Economic Growth</option>
+                                <option value="9">Industry, Innovation and Infrastructure</option>
+                                <option value="10">Reduced Inequality</option>
+                                <option value="11">Sustainable Cities and Communities</option>
+                                <option value="12">Responsible Consumption and Production</option>
+                                <option value="13">Climate Action</option>
+                                <option value="14">Life Below Water</option>
+                                <option value="15">Life on Land</option>
+                                <option value="16">Peace and Justice Strong Institutions</option>
+                                <option value="17">Partnerships to achieve the Goal</option>
+                                <option value="18">None</option>
+                            </select>
+                        </div>
+                        <textarea id="additionalContext" placeholder="Additional Context (Tech Stack, Requirements, etc.)"></textarea>
+                    </div>
+                </div>
+
+                <div class="company-info">
+                    <label>Company Background & Job Description:</label>
+                    <textarea id="companyInfo" placeholder="Enter company background, culture, and detailed job description here..."></textarea>
+                </div>
+
+                <select id="personalitySelect">
+                    <option value="professional">Professional Interviewer</option>
+                    <option value="friendly">Friendly and Casual</option>
+                    <option value="technical">Technical Expert</option>
+                    <option value="mentor">Supportive Mentor</option>
+                    <option value="challenging">Challenging Interviewer</option>
+                </select>
+                <select id="languageSelect">
+                    <option value="en-US">English (US)</option>
+                    <option value="en-IN">English (Indian)</option>
+                    <option value="en-GB">English (UK)</option>
+                    <option value="en-AU">English (Australian)</option>
+                    <option value="hi-IN">Hindi</option>
+                    <option value="zh">Chinese</option>
+                    <option value="es">Spanish</option>
+                    <option value="fr">French</option>
+                    <option value="de">German</option>
+                    <option value="ja">Japanese</option>
+                    <option value="ko">Korean</option>
+                </select>
+                <div class="guidelines-section">
+                    <p class="guidelines-info">Guidelines are used as a reference but won't strictly limit the interview scope.</p>
+                    <textarea id="jobGuidelines" placeholder="Enter job requirements or interview focus areas here. The AI will use these as a reference while maintaining a natural conversation flow."></textarea>
+                    <button id="saveGuidelines">Save Guidelines</button>
+                </div>
+            </div>
+            <div class="api-keys">
+                <div id="openaiKeySection" class="api-key-input" style="display: none;">
+                    <input type="password" id="openaiKeyInput" placeholder="Enter OpenAI API Key">
+                    <button id="saveOpenaiKey">Save OpenAI Key</button>
+                </div>
+                <div id="geminiKeySection" class="api-key-input" style="display: none;">
+                    <input type="password" id="geminiKeyInput" placeholder="Enter Google Gemini API Key">
+                    <button id="saveGeminiKey">Save Gemini Key</button>
+                </div>
+                <button id="deleteApiKey" style="display: none;">Change/Remove Key</button>
+            </div>
+            <div class="capture-controls">
+                <button id="screenAudioButton">
+                    Start Screen Audio Capture
+                    <div class="spinner"></div>
+                </button>
+                <button id="listenButton">
+                    Start Mic Listening
+                    <div class="spinner"></div>
+                </button>
+            </div>
+            <button id="clearButton">Clear Text</button>
+        </div>
+    </div>
+
+    <!-- Update the modal structure -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modal-logo" src="" alt="Logo" style="display: none;">
+            <p id="modal-message" class="text-center"></p>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/eel.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

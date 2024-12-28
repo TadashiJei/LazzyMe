@@ -1,0 +1,823 @@
+:root {
+  --primary-color: #7a92a2;
+  --secondary-color: #91b29f;
+  --background-color: #f5f7fa;
+  --text-color: #34495e;
+  --card-background: #ffffff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.5s ease-in-out;
+}
+
+h1 {
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 2.5em;
+  margin-bottom: 30px;
+}
+
+button {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px var(--shadow-color);
+}
+
+#clearButton {
+  background-color: var(--secondary-color);
+}
+
+#clearButton:hover {
+  background-color: #27ae60;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  flex-grow: 1;
+  transition: all 0.5s ease-in-out;
+}
+
+.questions, .answers {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 45%;
+  background-color: var(--card-background);
+  border-radius: 10px;
+  margin: 1vw;
+  padding: 20px;
+  box-shadow: 0 10px 20px var(--shadow-color);
+  transition: all 0.3s ease;
+}
+
+.questions:hover, .answers:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px var(--shadow-color);
+}
+
+h2 {
+  margin-top: 0;
+  color: var(--primary-color);
+  font-size: 1.5em;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+#questionsArea, #answersArea {
+  flex-grow: 1;
+  height: 400px;
+  overflow-y: auto;
+  padding: 15px;
+  background-color: var(--background-color);
+  border-radius: 5px;
+  transition: all 0.5s ease-in-out;
+}
+
+#questionsArea p, #answersArea p {
+  background-color: var(--card-background);
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  transition: all 0.2s ease;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+#questionsArea p:hover, #answersArea p:hover {
+  transform: translateX(5px);
+  box-shadow: 2px 2px 8px var(--shadow-color);
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2980b9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+  }
+  
+  .questions, .answers {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+/* Add these styles at the end of your existing CSS file */
+
+/* Update the existing spinner styles and add new styles for the button */
+.spinner {
+  display: none;
+  width: 20px;
+  height: 20px;
+  border: 3px solid transparent;
+  border-top: 3px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@keyframes spin {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+#listenButton {
+  position: relative;
+  padding-right: 40px; /* Make space for the spinner */
+}
+
+#listenButton.listening {
+  background-color: #e74c3c; /* Red color for stop state */
+}
+
+#listenButton.listening:hover {
+  background-color: #c0392b; /* Darker red for hover state */
+}
+
+#listenButton .spinner {
+  display: none;
+}
+
+#listenButton.listening .spinner {
+  display: block;
+}
+
+/* Add these styles for the logo image */
+.logo {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 100%;
+  height: auto;
+  width: 500px; /* Adjust this value based on your preferred default size */
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Responsive adjustments for the logo */
+@media (max-width: 768px) {
+  .logo-container {
+    height: 180px; /* Adjust this value for medium screens */
+  }
+  .logo {
+    width: 450px; /* Smaller size for medium screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-container {
+    height: 140px; /* Adjust this value for small screens */
+  }
+  .logo {
+    width: 350px; /* Even smaller size for small screens */
+  }
+}
+
+/* Update these styles for the logo container and logo */
+.logo-container {
+  position: relative;
+  width: 100%;
+  height: 120px; /* Adjust this value based on your logo's height */
+  margin: 0 auto -28px;
+  transition: all 0.5s ease-in-out;
+  overflow: hidden;
+}
+
+/* Update the logo-hidden class */
+.logo-hidden {
+  height: 0;
+  margin: 0;
+  opacity: 0;
+}
+
+.logo-hidden .logo {
+  opacity: 0;
+}
+
+/* Add these styles for the close-logo button */
+.close-logo {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: color 0.3s ease;
+  z-index: 10;
+}
+
+.close-logo:hover {
+  color: #e74c3c;
+}
+
+/* Existing styles... */
+
+/* Add this new style for centered text */
+.text-center {
+  text-align: center;
+}
+
+/* Existing styles... */
+
+/* Add this new style for the API key input */
+#apiKeyInput {
+  width: 300px; /* Increase this value to make it wider */
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Update the button container to better accommodate the wider input */
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-top: 28px;
+}
+
+/* Existing styles... */
+
+/* Add these styles for the modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    background-color: var(--card-background);
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: slideIn 0.3s;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes slideIn {
+    from {transform: translateY(-50px); opacity: 0;}
+    to {transform: translateY(0); opacity: 1;}
+}
+
+#modal-logo {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 100px;
+    height: auto;
+}
+
+/* Existing styles... */
+
+/* Add these styles for the TTS toggle */
+.tts-toggle {
+    cursor: pointer;
+    font-size: 0.8em;
+    margin-left: 10px;
+    transition: opacity 0.3s ease;
+}
+
+.tts-toggle.disabled {
+    opacity: 0.5;
+}
+
+/* Existing styles... */
+
+/* Add these styles for the answer container and mute icon */
+.answer-container {
+    position: relative;
+    margin-bottom: 10px;
+    background-color: var(--card-background);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    transition: all 0.2s ease;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.mute-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.mute-icon:hover {
+    opacity: 1;
+}
+
+/* Update this style to accommodate the mute icon */
+#answersArea p {
+    padding: 10px 30px 10px 15px; /* Increased right padding to make room for the mute icon */
+    margin: 0;
+    background-color: var(--card-background);
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    transition: all 0.2s ease;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* Modify the hover effect to apply to the container instead of the paragraph */
+.answer-container:hover {
+    transform: translateX(5px);
+    box-shadow: 2px 2px 8px var(--shadow-color);
+}
+
+/* Remove the hover effect from the paragraph */
+#answersArea p:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Existing styles... */
+
+.api-keys {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.api-key-input {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.api-key-input input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.api-key-input button {
+    white-space: nowrap;
+    padding: 8px 16px;
+}
+
+#deleteApiKey {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.model-selection {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.model-selection select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.model-selection select:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.guidelines-section {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.guidelines-section textarea {
+    width: 100%;
+    height: 100px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    margin-bottom: 10px;
+    font-family: inherit;
+}
+
+.guidelines-section textarea:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.capture-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.capture-controls button {
+    flex: 1;
+    position: relative;
+}
+
+.capture-controls button.active {
+    background-color: #dc3545;
+}
+
+.capture-controls button.active:hover {
+    background-color: #c82333;
+}
+
+#screenAudioButton.active {
+    background-color: #28a745;
+}
+
+#screenAudioButton.active:hover {
+    background-color: #218838;
+}
+
+.interviewer-settings {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#personalitySelect {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+#personalitySelect:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+#languageSelect {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+#languageSelect:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.interviewer-settings select {
+    margin-bottom: 15px;
+}
+
+.guidelines-info {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+    font-style: italic;
+}
+
+.guidelines-section {
+    margin-top: 15px;
+}
+
+.guidelines-section textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    resize: vertical;
+}
+
+.guidelines-section textarea:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.role-switch {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.role-switch label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #495057;
+}
+
+.role-switch select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.role-switch select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.role-info {
+    margin: 0;
+    font-size: 14px;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.role-switch.interviewer-mode {
+    background-color: #e8f4f8;
+    border-color: #b8daff;
+}
+
+.role-switch.expert-mode {
+    background-color: #f8f0e8;
+    border-color: #ffeeba;
+}
+
+.role-switch.developer-mode {
+    background-color: #e8f8f5;
+    border-color: #a3e4d7;
+}
+
+.role-switch.pitcher-mode {
+    background-color: #fff3e6;
+    border-color: #ffcc80;
+}
+
+.knowledge-base, .company-info {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.knowledge-base label, .company-info label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #495057;
+}
+
+.file-upload-container {
+    border: 2px dashed #ced4da;
+    border-radius: 4px;
+    padding: 15px;
+    text-align: center;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.file-upload-container:hover {
+    border-color: #007bff;
+    background-color: #f8f9fa;
+}
+
+.uploaded-files {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.uploaded-file {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.uploaded-file button {
+    background: none;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    padding: 2px 5px;
+}
+
+#companyInfo {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    resize: vertical;
+}
+
+.hackathon-info {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff3e6;
+    border-radius: 8px;
+    border: 1px solid #ffcc80;
+}
+
+.hackathon-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.hackathon-fields input[type="text"],
+.hackathon-fields textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.hackathon-fields textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.criteria-section {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #e9ecef;
+}
+
+.criteria-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.criteria-item input[type="number"] {
+    width: 80px;
+}
+
+#addCriterion {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#addCriterion:hover {
+    background-color: #218838;
+}
+
+.sdg-section {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #e9ecef;
+}
+
+#sdgGoals {
+    width: 100%;
+    min-height: 150px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+#sdgGoals option {
+    padding: 5px;
+}
+
+#sdgGoals option:checked {
+    background-color: #007bff;
+    color: white;
+}
+
+.hackathon-info label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #495057;
+}
+
+/* Loading indicator for file processing */
+.processing {
+    display: inline-block;
+    margin-left: 10px;
+    color: #6c757d;
+}
+
+.processing::after {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #6c757d;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
