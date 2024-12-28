@@ -1,4 +1,4 @@
-# AI Interview Assistant 🤖
+# Lazzy - Me | AI Assistant 🤖
 
 An intelligent interview preparation tool powered by OpenAI's GPT technology. This application helps users practice and prepare for job interviews through interactive Q&A sessions and real-time feedback.
 
